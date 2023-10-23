@@ -627,9 +627,9 @@
                 document.getElementById("cuong_do_anh_sang").textContent = "Cuong Do Anh Sang: " + data.cuong_do_anh_sang;
                 
                 updateChartCuongDoAnhSang(data.cuong_do_anh_sang);
-                updateChartNhietDo(data.cuong_do_anh_sang);
-                updateChartDoAm(data.cuong_do_anh_sang);
-                updateChartDoAmDat(data.cuong_do_anh_sang);
+                updateChartNhietDo(data.nhiet_do);
+                updateChartDoAm(data.do_am);
+                updateChartDoAmDat(data.do_am_dat);
             }
         };
         xhr.send();
@@ -707,7 +707,7 @@
     // Function to generate labels for the chart
     
 
-    var dataPerformance1 = {
+    var dataPerformance2 = {
         labels: generateLabels2(),
         series: [generateSeries2()]
     };
