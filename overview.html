@@ -503,7 +503,7 @@
 						<div class="col-lg-4 col-sm-6">
 							<div class="card">
 								<div class="card-content">
-									<div id="chartPerformance" class="ct-chart"></div>
+									<div id="chart-cuong-do-anh-sang" class="ct-chart"></div>
 								</div>
 								<div class="card-footer">
 									<hr>
@@ -519,29 +519,14 @@
 						<div class="col-lg-4 col-sm-6">
 							<div class="card">
 								<div class="card-content">
-									<div class="row">
-										<div class="col-xs-7">
-											<div class="numbers pull-left">
-												169
-											</div>
-										</div>
-										<div class="col-xs-5">
-											<div class="pull-right">
-												<span class="label label-danger">
-		 											-14%
-												</span>
-											</div>
-										</div>
-									</div>
-									<h6 class="big-title">total subscriptions <span class="text-muted">in last</span> 7 days</h6>
-		                            <div id="chartTotalSubscriptions"></div>
+									<div id="chart-do-am" class="ct-chart"></div>
 								</div>
 								<div class="card-footer">
 									<hr>
-									<div class="footer-title">View all members</div>
+									<div class="footer-title">Financial Statistics</div>
 									<div class="pull-right">
-										<button class="btn btn-default btn-fill btn-icon btn-sm">
-											<i class="ti-angle-right"></i>
+										<button class="btn btn-info btn-fill btn-icon btn-sm">
+											<i class="ti-plus"></i>
 										</button>
 									</div>
 								</div>
@@ -550,22 +535,7 @@
 						<div class="col-lg-4 col-sm-6">
 							<div class="card">
 								<div class="card-content">
-									<div class="row">
-										<div class="col-xs-7">
-											<div class="numbers pull-left">
-												8,960
-											</div>
-										</div>
-										<div class="col-xs-5">
-											<div class="pull-right">
-												<span class="label label-warning">
-		 											~51%
-												</span>
-											</div>
-										</div>
-									</div>
-									<h6 class="big-title">total downloads <span class="text-muted">in last</span> 6 years</h6>
-		                            <div id="chartTotalDownloads" ></div>
+									<div id="chart-nhiet-do" class="ct-chart"></div>
 								</div>
 								<div class="card-footer">
 									<hr>
@@ -577,6 +547,24 @@
 												<input type="file" id="upload" style="display:none">
 											</span>
 										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-4 col-sm-6">
+							<div class="card">
+								<div class="card-content">
+									<div id="chart-do-am-dat" class="ct-chart"></div>
+								</div>
+								<div class="card-footer">
+									<hr>
+									<div class="footer-title">Financial Statistics</div>
+									<div class="pull-right">
+										<button class="btn btn-info btn-fill btn-icon btn-sm">
+											<i class="ti-plus"></i>
+										</button>
 									</div>
 								</div>
 							</div>
@@ -614,7 +602,7 @@
 	<script src="static/assets/js/paper-dashboard.js"></script>
 
 	<!-- Paper Dashboard PRO DEMO methods, don't include it in your project! -->
-	<script src="static/assets/js/demo.js"></script>
+	<!-- <script src="static/assets/js/demo.js"></script> -->
 
 	<script type="text/javascript">
     	$(document).ready(function(){
@@ -638,7 +626,10 @@
                 document.getElementById("do_am_dat").textContent = "Do Am Dat: " + data.do_am_dat;
                 document.getElementById("cuong_do_anh_sang").textContent = "Cuong Do Anh Sang: " + data.cuong_do_anh_sang;
                 
-                updateChart(data.cuong_do_anh_sang);
+                updateChartCuongDoAnhSang(data.cuong_do_anh_sang);
+                updateChartNhietDo(data.cuong_do_anh_sang);
+                updateChartDoAm(data.cuong_do_anh_sang);
+                updateChartDoAmDat(data.cuong_do_anh_sang);
             }
         };
         xhr.send();
@@ -648,7 +639,7 @@
     setInterval(fetchData, 5000);
 </script>
 <script>
-    var optionsPerformance = {
+    var optionsPerformance1 = {
         showPoint: false,
         lineSmooth: true,
         height: "200px",
@@ -664,8 +655,183 @@
         height: "250px"
     };
 
+
     // Function to generate labels for the chart
-    function generateLabels() {
+    
+
+    var dataPerformance1 = {
+        labels: generateLabels1(),
+        series: [generateSeries1()]
+    };
+
+    var chartCuongDoAnhSang = new Chartist.Line('#chart-cuong-do-anh-sang', dataPerformance1, optionsPerformance1);
+
+    // Function to generate random series data
+    function generateSeries1() {
+        var series = [];
+        for (var i = 0; i < 12; i++) {
+            series.push(0); // Generate a random value between 0 and 16
+        }
+        return series;
+    }
+
+    // Function to update the chart with new series data
+    function updateChartCuongDoAnhSang( cuong_do_anh_sang) {
+        dataPerformance.labels.shift(); // Remove the first label
+        dataPerformance.labels.push(generateLabels()[11]); // Add a new label with seconds only
+        dataPerformance.series[0].shift(); // Remove the first value
+        dataPerformance.series[0].push(cuong_do_anh_sang); // Generate and add a new random value
+        chartCuongDoAnhSang.update(dataPerformance1);
+    }
+
+	
+</script>
+<script>
+    var optionsPerformance2 = {
+        showPoint: false,
+        lineSmooth: true,
+        height: "200px",
+        axisX: {
+            showGrid: false,
+            showLabel: true
+        },
+        axisY: {
+            offset: 40,
+        },
+        low: 0,
+        high: 15,
+        height: "250px"
+    };
+
+
+    // Function to generate labels for the chart
+    
+
+    var dataPerformance1 = {
+        labels: generateLabels2(),
+        series: [generateSeries2()]
+    };
+
+    var chartNhietDo = new Chartist.Line('#chart-nhiet-do', dataPerformance2, optionsPerformance2);
+
+    // Function to generate random series data
+    function generateSeries2() {
+        var series = [];
+        for (var i = 0; i < 12; i++) {
+            series.push(0); // Generate a random value between 0 and 16
+        }
+        return series;
+    }
+
+    // Function to update the chart with new series data
+    function updateChartNhietDo(nhiet_do) {
+        dataPerformance.labels.shift(); // Remove the first label
+        dataPerformance.labels.push(generateLabels()[11]); // Add a new label with seconds only
+        dataPerformance.series[0].shift(); // Remove the first value
+        dataPerformance.series[0].push(nhiet_do); // Generate and add a new random value
+        chartNhietDo.update(dataPerformance2);
+    }
+
+	
+</script>
+<script>
+    var optionsPerformance3 = {
+        showPoint: false,
+        lineSmooth: true,
+        height: "200px",
+        axisX: {
+            showGrid: false,
+            showLabel: true
+        },
+        axisY: {
+            offset: 40,
+        },
+        low: 0,
+        high: 15,
+        height: "250px"
+    };
+
+
+    // Function to generate labels for the chart
+    
+
+    var dataPerformance3 = {
+        labels: generateLabels3(),
+        series: [generateSeries3()]
+    };
+
+    var chartDoAm = new Chartist.Line('#chart-do-am', dataPerformance3, optionsPerformance3);
+
+    // Function to generate random series data
+    function generateSeries3() {
+        var series = [];
+        for (var i = 0; i < 12; i++) {
+            series.push(0); // Generate a random value between 0 and 16
+        }
+        return series;
+    }
+
+    // Function to update the chart with new series data
+    function updateChartDoAm(do_am) {
+        dataPerformance.labels.shift(); // Remove the first label
+        dataPerformance.labels.push(generateLabels()[11]); // Add a new label with seconds only
+        dataPerformance.series[0].shift(); // Remove the first value
+        dataPerformance.series[0].push(do_am); // Generate and add a new random value
+        chartDoAm.update(dataPerformance3);
+    }
+
+	
+</script>
+<script>
+    var optionsPerformance4 = {
+        showPoint: false,
+        lineSmooth: true,
+        height: "200px",
+        axisX: {
+            showGrid: false,
+            showLabel: true
+        },
+        axisY: {
+            offset: 40,
+        },
+        low: 0,
+        high: 15,
+        height: "250px"
+    };
+
+
+    // Function to generate labels for the chart
+    
+
+    var dataPerformance4 = {
+        labels: generateLabels4(),
+        series: [generateSeries4()]
+    };
+
+    var chartCuongDoAnhSang = new Chartist.Line('#chart-do-am-dat', dataPerformance4, optionsPerformance4);
+
+    // Function to generate random series data
+    function generateSeries4() {
+        var series = [];
+        for (var i = 0; i < 12; i++) {
+            series.push(0); // Generate a random value between 0 and 16
+        }
+        return series;
+    }
+
+    // Function to update the chart with new series data
+    function updateChartDoAm(do_am) {
+        dataPerformance.labels.shift(); // Remove the first label
+        dataPerformance.labels.push(generateLabels()[11]); // Add a new label with seconds only
+        dataPerformance.series[0].shift(); // Remove the first value
+        dataPerformance.series[0].push(do_am); // Generate and add a new random value
+        chartCuongDoAnhSang.update(dataPerformance4);
+    }
+
+	
+</script>
+<script>
+	function generateLabels() {
         var labels = [];
         var now = new Date();
         for (var i = 0; i < 12; i++) {
@@ -675,33 +841,5 @@
         }
         return labels;
     }
-
-    var dataPerformance = {
-        labels: generateLabels(),
-        series: [generateSeries()]
-    };
-
-    var chart = new Chartist.Line('#chartPerformance', dataPerformance, optionsPerformance);
-
-    // Function to generate random series data
-    function generateSeries() {
-        var series = [];
-        for (var i = 0; i < 12; i++) {
-            series.push(0); // Generate a random value between 0 and 16
-        }
-        return series;
-    }
-
-    // Function to update the chart with new series data
-    function updateChart( do_am_dat) {
-        dataPerformance.labels.shift(); // Remove the first label
-        dataPerformance.labels.push(generateLabels()[11]); // Add a new label with seconds only
-        dataPerformance.series[0].shift(); // Remove the first value
-        dataPerformance.series[0].push(do_am_dat); // Generate and add a new random value
-        chart.update(dataPerformance);
-    }
-
-    // Update the chart data every 5 seconds
-    // setInterval(updateChart, 5000);
 </script>
 </html>
