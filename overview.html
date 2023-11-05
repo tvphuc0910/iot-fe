@@ -414,7 +414,7 @@
 									<hr />
 									Đèn Led
 									<div class="pull-right">
-											<input type="checkbox" class="switch" />
+											<input type="checkbox" class="switch" id="lightCheckbox" onclick="submitForm('light')" />
 										</div>
 								</div>
 	                        </div>
@@ -441,7 +441,7 @@
 									<div class="stats">
 										Máy Bơm
 										<div class="pull-right">
-											<input type="checkbox" class="switch" />
+											<input type="checkbox" class="switch" id="waterCheckbox" onclick="submitForm('water')"/>
 										</div>
 									</div>
 								</div>
@@ -842,4 +842,20 @@
         return labels;
     }
 </script>
+<script>
+	function submitForm(action) {
+	  var form = document.createElement("form");
+	  form.setAttribute("method", "get");
+	  form.setAttribute("action", "/process");
+
+	  var hiddenField = document.createElement("input");
+	  hiddenField.setAttribute("type", "hidden");
+	  hiddenField.setAttribute("name", "do");
+	  hiddenField.setAttribute("value", action);
+	  form.appendChild(hiddenField);
+
+	  document.body.appendChild(form);
+	  form.submit();
+	}
+  </script>
 </html>
